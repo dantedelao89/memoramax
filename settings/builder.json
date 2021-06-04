@@ -1,0 +1,56 @@
+{
+  "title": "MemoraMax",
+  "packageName": "org.cocos2d.demo",
+  "startScene": "32c26816-e94f-4b75-a9b1-8880acbee211",
+  "excludeScenes": [],
+  "orientation": {
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": false
+  },
+  "webOrientation": "auto",
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "mainCompressionType": "default",
+  "mainIsRemote": false,
+  "optimizeHotUpdate": true,
+  "md5Cache": true,
+  "nativeMd5Cache": true,
+  "encryptJs": false,
+  "xxteaKey": "6f8e1cc7-2a06-4a",
+  "zipCompressJs": true,
+  "fb-instant-games": {},
+  "android": {
+    "REMOTE_SERVER_ROOT": "",
+    "packageName": "com.game.memoramax"
+  },
+  "ios": {
+    "REMOTE_SERVER_ROOT": "",
+    "ios_enable_jit": true,
+    "packageName": "org.cocos2d.demo"
+  },
+  "mac": {
+    "REMOTE_SERVER_ROOT": "",
+    "height": 720,
+    "packageName": "org.cocos2d.demo",
+    "width": 1280
+  },
+  "win32": {
+    "REMOTE_SERVER_ROOT": "",
+    "height": 720,
+    "width": 1280
+  },
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "http://192.168.43.57:7456/preview-android-instant/",
+    "host": "",
+    "packageName": "org.cocos2d.demo",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
+  },
+  "appBundle": false,
+  "agreements": {},
+  "includeAnySDK": false
+}

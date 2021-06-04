@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "cb7cfea2-0b30-4ee0-a698-2fb95725f2d1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 345,
+  "height": 345,
+  "platformSettings": {},
+  "subMetas": {
+    "blackberry": {
+      "ver": "1.0.4",
+      "uuid": "84840a35-62cb-4363-b97c-132bd31523f9",
+      "rawTextureUuid": "cb7cfea2-0b30-4ee0-a698-2fb95725f2d1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 5,
+      "trimY": 28,
+      "width": 335,
+      "height": 289,
+      "rawWidth": 345,
+      "rawHeight": 345,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

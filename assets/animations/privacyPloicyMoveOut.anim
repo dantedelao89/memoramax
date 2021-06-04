@@ -1,0 +1,40 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "privacyPloicyMoveOut",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.05,
+  "sample": 60,
+  "speed": 0.15,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "x": [
+        {
+          "frame": 0,
+          "value": -4.883
+        },
+        {
+          "frame": 0.016666666666666666,
+          "value": 224.245
+        },
+        {
+          "frame": 0.03333333333333333,
+          "value": 429.255
+        },
+        {
+          "frame": 0.05,
+          "value": 1133.46
+        }
+      ],
+      "opacity": []
+    }
+  },
+  "events": [
+    {
+      "frame": 0.05,
+      "func": "onBackAnimationEnd",
+      "params": []
+    }
+  ]
+}
