@@ -1,2 +1,2 @@
 # memoramax
-code for memoramax android
+code for memoramax
