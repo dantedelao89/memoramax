@@ -32,5 +32,5 @@ export const LANGUAGES = {
 }
 
 export const GAME_LINK ={
-    URL : "https://play.google.com/store/apps/details?id=com.no.color 6"
+    URL : "https://play.google.com/store/apps/details?id=com.game.memoramax"
 }
