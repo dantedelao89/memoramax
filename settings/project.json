@@ -31,10 +31,10 @@
     "audience": {
       "enable": true
     },
-    "enable": true,
+    "enable": false,
     "live": {
       "enable": false
     }
   },
-  "last-module-event-record-time": 1622605828908
+  "last-module-event-record-time": 1627378508593
 }

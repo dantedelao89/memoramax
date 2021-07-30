@@ -1,7 +1,7 @@
 import { GAME_MODE, END_POP_UP } from "../helper/constants";
 import { GameManager } from "../managers/GameManager";
 import SoundManager from "../managers/SoundManager";
-
+import AdManager from "../managers/AdManager";
 // Learn TypeScript:
 //  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
 // Learn Attribute:
@@ -14,22 +14,16 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class GameEnd extends cc.Component {
 
+    showingAdFromGp =false;
 
     private _delegate = null;
     @property(cc.Label)
-    header: cc.Label = null;
+    remarks: cc.Label = null;
+
 
     @property(cc.Label)
-    level: cc.Label = null;
+    comments : cc.Label = null;
 
-    @property(cc.Label)
-    remarks : cc.Label = null;
-
-    @property(cc.Label)
-    mode : cc.Label = null
-
-    @property(cc.Button)
-    accept : cc.Button = null
 
     @property(cc.Node)
     newRecord : cc.Node = null;
@@ -37,10 +31,17 @@ export default class GameEnd extends cc.Component {
     @property(cc.Node)
     timesUp : cc.Node = null;
 
-
-
     @property(cc.Node)
-    passed : cc.Node = null;
+    hintLayer : cc.Node = null;
+
+    @property(cc.Button)
+    adButtons : cc.Button = null;
+
+    @property(cc.Button)
+    wantHint : cc.Button = null;
+
+
+
 
     @property(cc.AudioClip)
     buttonPressed : cc.AudioClip = null;
@@ -74,30 +75,65 @@ export default class GameEnd extends cc.Component {
     }
 
     showPopUpFor(type : END_POP_UP, level){
-        this.level.node.getComponent("localiser").replaceValue(`${level+1}`);
-        this.level.node.getComponent("localiser").setStringForKey();
-
-        let currentMode  = GameManager.getInstance().getSelectedMode();
-        console.log("current mode", currentMode);
-        this.mode.string = GameManager.getInstance().getString(currentMode);
-
+        
         this.newRecord.active = false;
         this.timesUp.active = false;
-        this.passed.active = false;
+        this.hintLayer.active = false;
+        this.remarks.string = GameManager.getInstance().getString('newRecord');
+        // console.log("is ad present", AdManager.getInstance().isAdAvailable());
         switch(type){
             case END_POP_UP.CLEARD: 
-            this.passed.active = true;
-                break;
-            case END_POP_UP.FAILED:
-                this.timesUp.active = true;
-                break;
+                 this.remarks.string = GameManager.getInstance().getString('congratulations');
             case END_POP_UP.NEW_RECORD:
+               
+                this.adButtons.interactable = AdManager.getInstance().isAdAvailable();
                 this.newRecord.active = true;
-                break;        
+                break;         
+            case END_POP_UP.FAILED:
+                 this.timesUp.active = true;
+                 break;
+            case END_POP_UP.HINT:
+              this.hintLayer.active = true;
+              break;     
+            
         }
 
     }
 
+
+    showAds(){
+        if(!cc.sys.isBrowser){
+            if(!AdManager.getInstance().showInterstital(this)){
+                this.adHasbeenShown();
+                console.log("no ad avilable right now");
+            };
+        }
+    }
+
+    adHasbeenShown(){
+        let  hintCount = JSON.parse(cc.sys.localStorage.getItem("hint"));
+        hintCount +=3; // for now will add new once done
+        cc.sys.localStorage.setItem("hint", JSON.stringify(hintCount));
+        if( this.showingAdFromGp){
+            console.log("remove ads");
+             this._delegate.removeHintPopUp();
+        }else{
+            // this.adButtons.interactable = false
+        }
+       
+    }
+
+
+    watchAd(){
+        this.showingAdFromGp = true;
+        this.showAds();
+       
+    }
+
+
+    cancelAd(){
+        this._delegate.removeHintPopUp();
+    }
   
     // update (dt) {}
 }

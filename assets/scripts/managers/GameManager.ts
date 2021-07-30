@@ -9,7 +9,9 @@ import { GAME_MODE} from "../helper/constants";
     private _languageData = null;
     private _selectedMode = GAME_MODE.PRACTICE;
     private _currentLevel = 0;
-    private placementId = null;
+    private _currentDate = null;
+
+    public screen = [];
 
     static getInstance(){
         if(!GameManager._instance){
@@ -18,8 +20,12 @@ import { GAME_MODE} from "../helper/constants";
         return GameManager._instance;
     }
 
-    setAdIds(idObj){
-        this.placementId = idObj;
+    setCurrentDate(date){
+        this._currentDate = date;
+    }
+
+    getCurrentDate(){
+        return this._currentDate;
     }
 
     loadGameConfig() {
@@ -141,15 +147,15 @@ import { GAME_MODE} from "../helper/constants";
 
     }
 
-    getLevelInfo(levelMode : string){
+    getLevelInfo(){
         if(this._levelsData){
-            return this._levelsData[levelMode]["levels"];
+            return this._levelsData["levels"];
         }
     }
 
-    getLevelData(levelNo: number, levelMode : string){
+    getLevelData(levelNo: number){
         if(this._levelsData){
-            return this._levelsData[levelMode]["levels"][levelNo];
+            return this._levelsData["levels"][levelNo];
         }
 
     }
@@ -191,67 +197,16 @@ import { GAME_MODE} from "../helper/constants";
         return this._currentLevel;
     }
 
-
-    // Ads Managment 
-
-    showBannerAd(){
-
-        // console.log("show BAnner");
-        //     let banner = new cc.Ads.Banner(this.placementId.BANNER,cc.Ads.BANNER_POSITION.ALIGN_PARENT_BOTTOM);
-        //     // cc.Ads.AdSettings.addTestDevice("808a2024-66bb-4d52-9804-3c905991f2b3");
-        //     banner.on("onAdLoaded", () => {
-        //         cc.log("banner onAdLoaded");
-        //         // this.status_tips.string = "banner loaded";
-        //     }, this);
-    
-        //     banner.on("onError", (eCode) => {
-        //         cc.log("banner onError");
-        //     }, this);
-    
-        //     banner.on("onAdClicked", () => {
-        //         cc.log("banner onAdClicked");
-        //     }, this);
-
-        //     banner.show().then(() => {
-        //         cc.log("banner show-------");
-        //     }).catch((e) => {
-        //         cc.log("banner reject ", e);
-        //     });
-    }
-    
-    showInterstitalAds(){
-        //    let  interstital = new cc.Ads.Interstitial(this.placementId.INTERSTITIAL);
-        //     // this.interstital = new cc.Ads.Interstitial("1982508651779400_1982509301779335");
-        //     interstital.on("onInterstitialDisplayed", () => {
-        //         cc.log("interstital onInterstitialDisplayed");
-        //         // this.status_tips.string = "onInterstitialDisplayed";
-        //     });
-    
-        //     interstital.on("onInterstitialDismissed", () => {
-        //         cc.log("interstital onInterstitialDismissed");
-        //         // this.status_tips.string = "onInterstitialDismissed";
-        //     });
-    
-        //     interstital.on("onAdClicked", () => {
-        //         cc.log("interstital onAdClicked");
-        //         // this.status_tips.string = "onAdClicked";
-        //     });
-    
-        //     interstital.on("onError",(error)=>{
-        //         // this.status_tips.string = "onError";
-        //     });
-    
-        //     interstital.loadAd().then(() => {
-        //         return interstital.show();
-        //     }).catch((e) => {
-        //         cc.log("interstital catch", e);
-        //     });
+    pushScene(scene){
+         console.log("scnee", scene);
+         this.screen.push(scene);
      }
-    
-       
-    
 
+    popScene(){
+        return this.screen.pop();
+     }
 
-
-    
+    removeAllScene(){
+         this.screen.length = 0;
+     }
 }

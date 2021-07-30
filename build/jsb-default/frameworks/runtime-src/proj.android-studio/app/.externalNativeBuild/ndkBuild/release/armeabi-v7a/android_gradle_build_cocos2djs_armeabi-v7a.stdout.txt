@@ -1,0 +1,11 @@
+Android NDK: WARNING: Unsupported source file extensions in /Users/naushad/Downloads/memory_game/memoryGame/build/jsb-default/frameworks/cocos2d-x/cocos/Android.mk for module cocos2dx_static    
+Android NDK:   ../external/sources/edtaa3func/edtaa3func.h renderer/memop/RecyclePool.hpp    
+[armeabi-v7a] StaticLibrary  : libextension.a
+[armeabi-v7a] StaticLibrary  : libaudioengine.a
+[armeabi-v7a] StaticLibrary  : libvorbisidec.a
+[armeabi-v7a] StaticLibrary  : libcocos2dandroid.a
+[armeabi-v7a] StaticLibrary  : libcpufeatures.a
+[armeabi-v7a] StaticLibrary  : libpvmp3dec.a
+[armeabi-v7a] StaticLibrary  : libcocos2d.a
+[armeabi-v7a] StaticLibrary  : libeditorsupport.a
+[armeabi-v7a] SharedLibrary  : libcocos2djs.so

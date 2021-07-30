@@ -24,8 +24,17 @@ export default class HUD extends cc.Component {
     @property(cc.Button)
     back: cc.Button = null;
 
+    @property(cc.Button)
+    setting: cc.Button = null;
+
+    @property(cc.Button)
+    level: cc.Button = null;
+
     @property(cc.AudioClip)
     backButtonAudio : cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    buttonAudio : cc.AudioClip = null;
 
 
     private delegate;
@@ -60,27 +69,25 @@ export default class HUD extends cc.Component {
     }
 
     setVisiblity(gameScreen : GAME_SCREEN){
-        // console.log("option error in setVisibility", gameScreen);    
-        switch(gameScreen){
-            case GAME_SCREEN.MODE_SELECTION:
-                this.volume.node.active = true;
-                this.back.node.active = false;
-                this.selectMode.node.active = true;
-                break;
-            case GAME_SCREEN.LEVEL_SELECTION:
-            case GAME_SCREEN.GAME_PLAY:
-                this.volume.node.active = true;
-                this.back.node.active = true;
-                this.selectMode.node.active = false;
-                break;
-            default:
-                console.log("option error in setVisibility");    
-        }
+        this.volume.node.active = true;
+        this.setting.node.active = true;
+        this.level.node.active = true;
     }
 
     updateVolumeIcon(){
         let sprite = this.volume.node.getChildByName("Background").getComponent(cc.Sprite);
         sprite.spriteFrame = JSON.parse(cc.sys.localStorage.getItem("Sound")) ? this.volumeUp: this.volumeDown;
+    }
+
+    onSetting(){
+        SoundManager.getInstance().playEffect(this.buttonAudio, false);
+        this.delegate.openSettings();
+
+    }
+
+    onLevelSelection(){
+        SoundManager.getInstance().playEffect(this.buttonAudio, false);
+        this.delegate.showLevelSelection();
     }
 
 

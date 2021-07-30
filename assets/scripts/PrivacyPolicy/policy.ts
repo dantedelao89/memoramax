@@ -15,6 +15,12 @@ export default class PrivacyPolicy extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
+    @property(cc.Label)
+    label2: cc.Label = null;
+    @property(cc.Label)
+    label3: cc.Label = null;
+
+    isTerm : false;
 
     
   @property(cc.AudioClip)
@@ -36,6 +42,8 @@ export default class PrivacyPolicy extends cc.Component {
             this.setString();
            
         })))
+
+        console.log("string",this.label.string );
         
         // let ans = "";
         // for(let item of stringArray){
@@ -50,9 +58,26 @@ export default class PrivacyPolicy extends cc.Component {
 
 
     setString(){
-        let   stringArray= GameManager.getInstance().getString("privacyInformation");
-        this.label.string = stringArray;      
+
+        this.label2.node.active =true;
+        this.label3.node.active =true;
+        if(this.isTerm){
+         let stringArray= GameManager.getInstance().getString("terms1");  
+         this.label.string = stringArray.reduce((x, ans)=>   x+ ans, "");     
+         stringArray= GameManager.getInstance().getString("terms2");  
+         this.label2.string = stringArray.reduce((x, ans)=>   x+ ans, "");  
+         stringArray= GameManager.getInstance().getString("terms3");  
+         this.label3.string = stringArray.reduce((x, ans)=>   x+ ans, ""); 
+        }else{
+            let  stringArray= GameManager.getInstance().getString("privacyInformation");
+            this.label.string = stringArray.reduce((x, ans)=>   x+ ans, ""); 
+            this.label2.node.active =false;
+            this.label3.node.active =false;
+        }
+      
+         
     }
+
 
 
 

@@ -1,7 +1,7 @@
 {
   "title": "MemoraMax",
   "packageName": "org.cocos2d.demo",
-  "startScene": "32c26816-e94f-4b75-a9b1-8880acbee211",
+  "startScene": "37de63e4-e09d-41cb-b4df-3417301534e0",
   "excludeScenes": [],
   "orientation": {
     "landscapeLeft": false,

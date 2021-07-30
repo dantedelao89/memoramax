@@ -26,6 +26,11 @@ export default class Card extends cc.Component {
     @property(cc.AudioClip)
     cardFlip: cc.Node = null;
 
+    @property(cc.Node)
+    overLay: cc.Node = null;
+
+    
+
 
   
 
@@ -45,10 +50,14 @@ export default class Card extends cc.Component {
         this._delagateScript = delegate;
     }
 
-    setUpUI (spriteFrameKey, level, mode) {
+    setUpUI (spriteFrameKey, level, mode, cardSpriteFrame) {
         this._cardName = spriteFrameKey;
-        console.log("card name", spriteFrameKey);
+        // console.log("card name", spriteFrameKey, cardSpriteFrame);
         this.image.spriteFrame= GameManager.getInstance().getSpriteFrame(mode, level, spriteFrameKey);
+        this.front.spriteFrame = cardSpriteFrame;
+        this.back.spriteFrame = cardSpriteFrame;
+        this.animationNode.setContentSize(cardSpriteFrame._originalSize);
+        this.node.setContentSize(cardSpriteFrame._originalSize);
     }
 
 
@@ -95,7 +104,6 @@ export default class Card extends cc.Component {
 
 
     unreveal ( ) {
-        // console.log("un reveal animation");
         let callFunc1 = cc.callFunc(function () {
             this.setFaceUp(false);
         }, this);
@@ -107,6 +115,17 @@ export default class Card extends cc.Component {
         let bounce = cc.scaleTo(0.1, 0.9,0.9).easing(cc.easeBounceInOut());
         let correctAnimation = cc.sequence(bounce, cc.delayTime(0.2), cc.scaleTo(0.1, 1, 1));
         this.animationNode.runAction(correctAnimation);
+    }
+
+
+    enableOverlay(){
+        this.overLay.active = true;
+
+    }
+
+    disableOverlay(){
+        this.overLay.active = false;
+
     }
 
     // update (dt) {}
