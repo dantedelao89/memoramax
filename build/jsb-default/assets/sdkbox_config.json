@@ -112,8 +112,6 @@
             }
         },
         "AdMob": {
-            "testdevice": "FE20924C46522E2E204587EB339897C6,kGADSimulatorID", 
-            "test": true, 
             "ads": {
                 "interstitial": {
                     "type": "interstitial",
@@ -125,7 +123,7 @@
                 },
                 "gameover": {
                     "type": "interstitial",
-                    "id": "ca-app-pub-3940256099942544/8691691433"
+                    "id": "ca-app-pub-8336977690595902/2542786440"
                 },
                 "home": {
                     "width": 300,

@@ -40,6 +40,11 @@ export default class Loading extends cc.Component {
       }
 
 
+      if(!cc.sys.localStorage.getItem("clue")){
+        cc.sys.localStorage.setItem("clue", 3);
+      }
+
+
       if(!cc.sys.localStorage.getItem("rewardClaimDate")){
         cc.sys.localStorage.setItem("rewardClaimDate", new Date(98,1,1).toDateString());
       }

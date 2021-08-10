@@ -44,8 +44,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: ./../../cocos2d-x/cocos/platform/android/java/libs/okhttp-3.12.7.jar" level="project" />
     <orderEntry type="library" name="Gradle: ./../../cocos2d-x/cocos/platform/android/java/libs/com.android.vending.expansion.zipfile.jar" level="project" />
+    <orderEntry type="library" name="Gradle: ./../../cocos2d-x/cocos/platform/android/java/libs/okhttp-3.12.7.jar" level="project" />
     <orderEntry type="library" name="Gradle: ./../../cocos2d-x/cocos/platform/android/java/libs/okio-1.15.0.jar" level="project" />
   </component>
 </module>

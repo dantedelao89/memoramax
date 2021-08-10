@@ -9,6 +9,9 @@
         </activity>
         <meta-data android:name="android.app.lib_name" android:value="cocos2djs" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.CodelessDebugLogEnabled"
+            android:value="true" />
         <receiver android:name="com.game.memoramax.LocalNotification">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />

@@ -16,8 +16,6 @@ export default class Settings extends cc.Component {
     languagePopUp: cc.Node = null;
 
 
-    @property(cc.Node)
-    privacyPolicy: cc.Node = null;
 
     @property(cc.AudioClip)
     buttonPressed: cc.AudioClip = null;
@@ -42,16 +40,13 @@ export default class Settings extends cc.Component {
 
 
     openTermAndConditions(){
-        this.privacyPolicy.getComponent("policy").isTerm = true;
-        SoundManager.getInstance().playEffect(this.buttonPressed, false);
-        this.privacyPolicy.active  = true;
+        this.delegatScript.openTermAndConditions();
     }
 
 
     openPrivacyPolicy(){
-        this.privacyPolicy.getComponent("policy").isTerm = false;
-        SoundManager.getInstance().playEffect(this.buttonPressed, false);
-        this.privacyPolicy.active = true;
+
+        this.delegatScript.openPrivacyPolicy();
 
     }
 
@@ -63,6 +58,9 @@ export default class Settings extends cc.Component {
     closeAllPopUps(){
         this.languagePopUp.active = false;
     }
+
+
+
 
 
 

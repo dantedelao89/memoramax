@@ -50,8 +50,6 @@ export default class Home extends cc.Component {
   @property(cc.AudioClip)
   musicClip: cc.AudioClip = null;
 
-  @property(cc.Node)
-  moreInfo: cc.Node = null;
 
 
   @property(cc.Node)
@@ -78,7 +76,10 @@ export default class Home extends cc.Component {
   @property(cc.Node)
   dailyRewards: cc.Node = null;
 
+  @property(cc.Node)
+  loader: cc.Node = null;
 
+ 
   onLoad() {
 
 
@@ -94,8 +95,12 @@ export default class Home extends cc.Component {
     this.settings.zIndex = 9;
     this.settings.getComponent("settings").init(this);
     this.howToPlayPopUp.zIndex =7;
-    this.moreInfo.zIndex =7;
-    this.privacyPolicy.zIndex = 7;
+    // this.moreInfo.zIndex =7;
+    this.loader.zIndex = 12;
+    this.privacyPolicy.zIndex = 50;
+    // this.privacyPolicy.getComponent("policy").setTerm();
+    // this.privacyPolicy.getComponent("policy").setPrivacy();
+
     this.terms.active = !JSON.parse(cc.sys.localStorage.getItem("hasTermAccepted"));
     console.log("active", this.terms.active, cc.sys.localStorage.getItem("hasTermAccepted"));
     
@@ -119,17 +124,6 @@ export default class Home extends cc.Component {
         }
       })
     }
-
-
-
-
-
-
-    
-
-
-
-
   }
 
   setupUI() {
@@ -142,13 +136,14 @@ export default class Home extends cc.Component {
     this.futureDetails.getComponent("gameFutureDetails").setDelegatScript(this);
     this.dailyRewards.getComponent("dailyRewards").setDelegate(this);
     this.node.addChild( this.futureDetails)
+    // this.addLevelsInLevelSelection();
   
 
     // MARK: SHOWING BANNER ADS
     if(cc.sys.isMobile){
       // sdkbox.PluginShare.init();
       AdManager.getInstance().init();
-      AdManager.getInstance().setTestDevice('D59E35EC24A739656982C65F234164CB');
+      // AdManager.getInstance().setTestDevice('D59E35EC24A739656982C65F234164CB');
       AdManager.getInstance().cacheAds('gameover');
       // AdManager.getInstance().cacheAds('banner');
     }
@@ -193,6 +188,8 @@ export default class Home extends cc.Component {
     if(this.levelSelectionNode.active){
       return;
     }
+
+    
     this.levelSelectionNode.active = true;  
     this.setLevelSelectionScreen();
     this.gameScreen == GAME_SCREEN.SETTINGS && GameManager.getInstance().popScene();
@@ -220,10 +217,10 @@ export default class Home extends cc.Component {
     this.howToPlayPopUp.active = false;
   }
 
-  setLevelSelectionScreen() {
+
+  addLevelsInLevelSelection(){
     let levels = GameManager.getInstance().getLevelInfo();
     this.scrollViewLayout.node.removeAllChildren();
-
     let totalFrame = Math.ceil(levels.length / 10);
     for(let i = 0; i <  totalFrame; i++){
       let levelHolder = cc.instantiate(this.levelHolderPrefab);
@@ -231,7 +228,18 @@ export default class Home extends cc.Component {
       levelHolder.getComponent("levelUIManager").populateLevels(i * 10);
       this.scrollViewLayout.node.addChild(levelHolder);
     }
+  }
 
+  setLevelSelectionScreen() {
+    let levels = GameManager.getInstance().getLevelInfo();
+    this.scrollViewLayout.node.removeAllChildren();
+    let totalFrame = Math.ceil(levels.length / 10);
+    for(let i = 0; i <  totalFrame; i++){
+      let levelHolder = cc.instantiate(this.levelHolderPrefab);
+      levelHolder.getComponent("levelUIManager").setDelegateComponent(this);
+      levelHolder.getComponent("levelUIManager").populateLevels(i * 10);
+      this.scrollViewLayout.node.addChild(levelHolder);
+    }
     if(totalFrame == 1){
       this.scrollViewLayout.node.children[0].width = 1000;
       this.scrollViewLayout.node.getComponent(cc.Widget).isAlignHorizontalCenter = true;
@@ -427,8 +435,10 @@ export default class Home extends cc.Component {
   showPrivacyPolicy(){
     // this.playLoader();
     SoundManager.getInstance().playEffect(this.buttonPressed, false);
-    this.moreInfo.active = false;
+    // this.moreInfo.active = false;
     this.privacyPolicy.active = true;
+    console.log("show privact plicty");
+
   }
 
   enabledMoreGamesButton(isActive){
@@ -490,6 +500,23 @@ export default class Home extends cc.Component {
     }
    
   }
+
+
+openTermAndConditions(){
+  this.privacyPolicy.active = true;
+  this.privacyPolicy.getComponent("policy").setTerm(this.loader);
+
+  
+}
+
+
+openPrivacyPolicy(){
+ 
+  this.privacyPolicy.active = true;
+  this.privacyPolicy.getComponent("policy").setPrivacy(this.loader);
+ 
+  
+}
 
 
 

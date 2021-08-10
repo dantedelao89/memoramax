@@ -116,7 +116,7 @@ export default class GamePlay extends cc.Component {
     onDisable(){
         if( !this.node.parent.getComponent("home").isforSetting){
             clearInterval(this.interval)  ;
-            this.OpenCards.length =0;
+            this.OpenCards.length = 0;
             this.cardsInPair.length =0;
             this.bouns.node.active = false; 
             this.tutorialCards.length = 0;
@@ -262,12 +262,14 @@ export default class GamePlay extends cc.Component {
         let nodeSpace = this.hand.parent.convertToNodeSpace(worldSpace);
         this.hand.y = nodeSpace.y - (card.height  * card.scale);
         this.hand.x = nodeSpace.x;
+        this.hand.stopAllActions();
         this.hand.runAction(cc.sequence(cc.moveBy(.5,  0 , 50), cc.moveBy(.5, 0, -50)).repeat(1000));
     }
 
 
     startGameTimer (){
         let target = this;
+        target.optionLayer.getComponent("options").updateTimer(0 , this.totalTime)
         this.interval = setInterval(()=>{
             this._timer++;
 
@@ -325,7 +327,8 @@ export default class GamePlay extends cc.Component {
             if(this.cardsInPair.length != this.groupOf){
                 return
             }
-            this.playBounsAnimation();  
+        
+            this.playBounsAnimation();
             this.isTouchBlocked = true;
             this.node.runAction(cc.sequence(cc.delayTime(0.2), cc.callFunc(()=>{
             for(let cardScipt of cards){
@@ -345,15 +348,6 @@ export default class GamePlay extends cc.Component {
 
             if(this.isTutoiral){
                 this.showGameInstructionPopUp();
-                // this.node.runAction(cc.sequence( cc.callFunc(()=>{
-                    
-                // //    }), cc.delayTime(2), cc.callFunc(()=>{
-                       
-                //    }))); 
-               
-
-                // show game pop up and then end the message 
-                // loading 
             }
 
         }else{
@@ -436,7 +430,7 @@ export default class GamePlay extends cc.Component {
         this.interval = setInterval(()=>{
             target.optionLayer.getComponent("options").updateTimer(time, this.levelData.timer.totalTime)
             time--;
-            console.log("time",time);
+            // console.log("time",time);
             this.timerBar.progress = time/this.levelData.timer.memorizeTime;
             if(time === -1){
                 clearInterval(this.interval);
@@ -454,7 +448,6 @@ export default class GamePlay extends cc.Component {
 
 
     onPlayAgainCancel(){
-
         this.gameEndAlert.active = false;
         this.gameEndAlert.removeFromParent();
         this.node.parent.getComponent("home").onBack();
@@ -528,10 +521,10 @@ export default class GamePlay extends cc.Component {
        this.optionLayer.getComponent('options').updateHindText();
    }
 
-   showHintPopUP(){
+   showHintPopUP(type){
        console.log("cc.sys.getNetworkType()", cc.sys.getNetworkType(),  cc.sys.NetworkType.LAN, cc.sys.NetworkType.WWAN)
     if (cc.sys.getNetworkType() == cc.sys.NetworkType.LAN || cc.sys.getNetworkType() == cc.sys.NetworkType.WWAN){
-        this.gameEndAlert.getComponent("gameEnd").showPopUpFor(END_POP_UP.HINT, this._level);
+        this.gameEndAlert.getComponent("gameEnd").showPopUpFor(type, this._level);
         this.gameEndAlert.active = true;
         clearInterval(this.interval);
     }else{
@@ -551,6 +544,47 @@ export default class GamePlay extends cc.Component {
        .start();
    }
 
+
+
+   openPairCards(){
+
+    let hiddenCards  = [];
+    let targetCard = null;
+
+    
+    if(this.cardsInPair.length == this.groupOf || this.isTouchBlocked){
+        console.log("please. return");
+        return;
+    }
+    else if(this.cardsInPair.length!=0 && this.cardsInPair.length <= this.groupOf){
+        hiddenCards = this.cardsInPair;
+    }else{
+        // console.log("innside else");
+          hiddenCards =  this.gameLayout.node.children.filter(item =>  !item.getComponent('cards').isOpen());  
+    }
+
+
+    // console.log("hidden cards hehhehe", hiddenCards, this.cardsInPair);
+    if(hiddenCards.length > 0){
+      let card = hiddenCards[0];
+      let pairs =  this.gameLayout.node.children.filter(item => 
+      item.getComponent('cards').getCardName() ==  card.getComponent('cards').getCardName() ); 
+    //   console.log("pairs", pairs, card.getComponent('cards').getCardName());
+      pairs.forEach(card=>{
+          if(!card.getComponent('cards').isOpen()){
+            this.showCard(card)
+        }
+    });
+        
+       
+     }
+            
+       
+     
+   }
+
+
+    
 
 
 

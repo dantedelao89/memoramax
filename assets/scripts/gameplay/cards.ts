@@ -128,5 +128,10 @@ export default class Card extends cc.Component {
 
     }
 
+    isOpen(){
+        // console.log("isopen", this._isOpen);
+        return this._isOpen;
+    }
+
     // update (dt) {}
 }

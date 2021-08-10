@@ -18,7 +18,8 @@ export const enum END_POP_UP {
     NEW_RECORD = 1,
     CLEARD,
     FAILED,
-    HINT
+    FOR_HIT,
+    FOR_CLUE
 }
 
 export const LANGUAGES = {
